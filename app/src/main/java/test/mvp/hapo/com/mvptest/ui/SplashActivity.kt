@@ -8,6 +8,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.splash_layout.*
 import test.mvp.hapo.com.mvptest.R
 import test.mvp.hapo.com.mvptest.ui.main.MainActivity
+import test.mvp.hapo.com.mvptest.ui.list.ListActivity
 
 /**
  * MVPTest
@@ -27,6 +28,7 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         button01.setOnClickListener(clickListener)
         button02.setOnClickListener(clickListener)
         button03.setOnClickListener(clickListener)
+        button04.setOnClickListener(clickListener)
     }
 
     private val clickListener = View.OnClickListener { view->
@@ -34,12 +36,20 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
             R.id.button01 -> showToast("1")
             R.id.button02 -> showToast("2")
             R.id.button03 -> goMainActivity()
+            R.id.button04 -> goListActivity()
         }
     }
 
     private fun goMainActivity(){
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         val message = "go Main!"
+
+        intent.putExtra("message",message)
+        startActivity(intent)
+    }
+    private fun goListActivity(){
+        val intent = Intent(this@SplashActivity, ListActivity::class.java)
+        val message = "go List!"
 
         intent.putExtra("message",message)
         startActivity(intent)

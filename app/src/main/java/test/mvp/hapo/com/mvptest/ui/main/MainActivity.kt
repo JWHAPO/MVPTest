@@ -2,12 +2,10 @@ package test.mvp.hapo.com.mvptest.ui.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.Observable
 import test.mvp.hapo.com.mvptest.R
-import test.mvp.hapo.com.mvptest.ui.SplashContract
-import test.mvp.hapo.com.mvptest.ui.SplashPresenter
+import kotlinx.android.synthetic.main.main_layout.*
 
 /**
  * MVPTest
@@ -22,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
 
+        val plus = plusBtn.clicks().map { +1 }
+        val minus = minusBtn.clicks().map { -1 }
+
+        Observable.merge(plus, minus)
+                .scan(0){acc: Int, value: Int -> acc + value}
+                .subscribe{resultText.text = it.toString()}
     }
 
 }
