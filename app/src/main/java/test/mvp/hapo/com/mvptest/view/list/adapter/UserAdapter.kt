@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.adapter
+package test.mvp.hapo.com.mvptest.view.list.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.list_row.view.*
 import test.mvp.hapo.com.mvptest.R
-import test.mvp.hapo.com.mvptest.data.User
+import test.mvp.hapo.com.mvptest.network.model.User
 
 /**
  * MVPTest

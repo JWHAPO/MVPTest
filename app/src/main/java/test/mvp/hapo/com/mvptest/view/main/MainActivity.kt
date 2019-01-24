@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.ui.main
+package test.mvp.hapo.com.mvptest.view.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

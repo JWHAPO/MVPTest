@@ -1,14 +1,17 @@
-package test.mvp.hapo.com.mvptest.ui
+package test.mvp.hapo.com.mvptest.view.splash
 
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.splash_layout.*
 import test.mvp.hapo.com.mvptest.R
-import test.mvp.hapo.com.mvptest.ui.main.MainActivity
-import test.mvp.hapo.com.mvptest.ui.list.ListActivity
+import test.mvp.hapo.com.mvptest.network.model.User
+import test.mvp.hapo.com.mvptest.view.list.ListActivity
+import test.mvp.hapo.com.mvptest.view.main.MainActivity
 
 /**
  * MVPTest
@@ -24,6 +27,11 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_layout)
+
+        val user :User = User("name","aa","")
+
+        Log.d("TAG",user.toString())
+
 
         button01.setOnClickListener(clickListener)
         button02.setOnClickListener(clickListener)

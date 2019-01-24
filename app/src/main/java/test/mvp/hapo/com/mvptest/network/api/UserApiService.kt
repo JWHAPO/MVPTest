@@ -1,16 +1,16 @@
-package test.mvp.hapo.com.mvptest.api
+package test.mvp.hapo.com.mvptest.network.api
 
 import io.reactivex.Observable
 import retrofit2.http.GET
-import test.mvp.hapo.com.mvptest.data.User
+import test.mvp.hapo.com.mvptest.network.model.User
 
 /**
  * MVPTest
- * Class: UserRequestInterface
+ * Class: UserApiService
  * Created by JEONGWOOKIM on 2019-01-23.
  * Description:
  */
-interface UserRequestInterface {
+interface UserApiService {
 
     @GET("users")
     fun getUsers() : Observable<List<User>>

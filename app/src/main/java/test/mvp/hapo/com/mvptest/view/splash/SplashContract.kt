@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.ui
+package test.mvp.hapo.com.mvptest.view.splash
 
 /**
  * MVPTest
@@ -13,6 +13,6 @@ interface SplashContract{
     }
 
     interface Presenter{
-        var view: SplashContract.View
+        var view: View
     }
 }

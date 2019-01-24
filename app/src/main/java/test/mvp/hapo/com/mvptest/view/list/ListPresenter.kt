@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.ui.list
+package test.mvp.hapo.com.mvptest.view.list
 
 /**
  * MVPTest

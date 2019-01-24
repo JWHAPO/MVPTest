@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.ui.list
+package test.mvp.hapo.com.mvptest.view.list
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -14,9 +14,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import test.mvp.hapo.com.mvptest.R
-import test.mvp.hapo.com.mvptest.adapter.UserAdapter
-import test.mvp.hapo.com.mvptest.api.UserRequestInterface
-import test.mvp.hapo.com.mvptest.data.User
+import test.mvp.hapo.com.mvptest.app.BASE_URL
+import test.mvp.hapo.com.mvptest.network.ApiClient
+import test.mvp.hapo.com.mvptest.network.api.UserApiService
+import test.mvp.hapo.com.mvptest.network.model.User
+import test.mvp.hapo.com.mvptest.utils.PrefUtils
+import test.mvp.hapo.com.mvptest.view.list.adapter.UserAdapter
 
 /**
  * MVPTest
@@ -27,11 +30,11 @@ import test.mvp.hapo.com.mvptest.data.User
 
 class ListActivity : AppCompatActivity(), UserAdapter.Listener {
 
-    private val TAG = ListActivity::class.java.simpleName
-    private val BASE_URL = "http://localhost:8080/"
-    private var mCompositeDisposable : CompositeDisposable? = CompositeDisposable()
-    private var mUserArrayList: ArrayList<User>? = null
-    private var mAdapter : UserAdapter? = null
+    private val tag = ListActivity::class.java.simpleName
+    private var mCompositeDisposable : CompositeDisposable = CompositeDisposable()
+    private lateinit var mUserArrayList: ArrayList<User>
+    private lateinit var mAdapter : UserAdapter
+    private lateinit var userApiService: UserApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,25 +55,19 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener {
     }
 
     private fun loadJson(){
-        Log.d(TAG, "loadJson")
+        Log.d(tag, "loadJson")
 
-        val userRequestInterface = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(UserRequestInterface::class.java)
+        userApiService = ApiClient().getClient(applicationContext).create(UserApiService::class.java)
 
-        mCompositeDisposable?.add(userRequestInterface.getUsers()
-                .observeOn(AndroidSchedulers.mainThread())
+        mCompositeDisposable?.add(userApiService.getUsers()
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResponse, this::handleError)
         )
     }
 
-
-
     private fun handleResponse(userList: List<User>){
-        Log.d(TAG, "handleResponse")
+        Log.d(tag, "handleResponse")
         mUserArrayList = ArrayList(userList)
         mAdapter = UserAdapter(mUserArrayList!!, this)
 
@@ -78,7 +75,7 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener {
     }
 
     private fun handleError(error: Throwable) {
-        Log.d(TAG, error.localizedMessage)
+        Log.d(tag, error.localizedMessage)
         Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 

@@ -1,4 +1,4 @@
-package test.mvp.hapo.com.mvptest.ui
+package test.mvp.hapo.com.mvptest.view.splash
 
 /**
  * MVPTest
@@ -7,6 +7,6 @@ package test.mvp.hapo.com.mvptest.ui
  * Description:
  */
 
-class SplashPresenter : SplashContract.Presenter{
+class SplashPresenter : SplashContract.Presenter {
     lateinit override var view: SplashContract.View
 }
