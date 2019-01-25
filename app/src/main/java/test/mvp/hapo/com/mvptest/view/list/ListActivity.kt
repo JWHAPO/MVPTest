@@ -22,7 +22,7 @@ import test.mvp.hapo.com.mvptest.view.list.adapter.UserAdapter
 class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.View {
     private val tag = ListActivity::class.java.simpleName
 
-    private var presenter: ListPresenter? = null
+    private lateinit var presenter: ListPresenter
 
     private lateinit var mUserArrayList: ArrayList<UserUnit>
     private lateinit var mAdapter : UserAdapter
@@ -31,7 +31,8 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_layout)
 
-        presenter = ListPresenter(this)
+        presenter = ListPresenter()
+        presenter.attach(this)
 
     }
 
@@ -39,11 +40,11 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
         Log.d(tag, "initView")
 
         initRecyclerView()
-        presenter?.getUser(applicationContext)
+        presenter.getUser(applicationContext)
     }
 
     override fun updateUserList(user: User) {
-        Log.d(tag, "handleResponse")
+        Log.d(tag, "updateUserList")
 
         mUserArrayList = ArrayList(user._embedded.userList)
         mAdapter = UserAdapter(mUserArrayList!!, this)

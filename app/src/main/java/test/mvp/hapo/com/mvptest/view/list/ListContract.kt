@@ -1,6 +1,7 @@
 package test.mvp.hapo.com.mvptest.view.list
 
 import android.content.Context
+import test.mvp.hapo.com.mvptest.app.BaseContract
 import test.mvp.hapo.com.mvptest.network.model.User
 
 /**
@@ -11,12 +12,12 @@ import test.mvp.hapo.com.mvptest.network.model.User
  */
 
 interface ListContract{
-    interface View{
+    interface View : BaseContract.View{
         fun initView()
         fun updateUserList(user: User)
         fun toastErrorMsg(error: Throwable)
     }
-    interface Presenter{
+    interface Presenter: BaseContract.Presenter<View>{
         fun getUser(context: Context)
         fun clearCompositeDisposable()
     }
