@@ -13,5 +13,5 @@ import test.mvp.hapo.com.mvptest.network.model.User
 interface UserApiService {
 
     @GET("users")
-    fun getUsers() : Observable<List<User>>
+    fun getUsers() : Observable<User>
 }

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * Created by JEONGWOOKIM on 2019-01-24.
  * Description: API Client
  */
-class ApiClient(){
+object ApiClient{
     private lateinit var retrofit: Retrofit
     private lateinit var okHttpClient: OkHttpClient
 
@@ -34,6 +34,7 @@ class ApiClient(){
 
         return retrofit
     }
+
 
     private fun  initOkHttp(context: Context){
         var httpClient :OkHttpClient.Builder =

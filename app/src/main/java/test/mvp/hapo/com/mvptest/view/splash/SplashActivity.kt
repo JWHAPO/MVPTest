@@ -28,11 +28,6 @@ class SplashActivity : AppCompatActivity(), SplashContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_layout)
 
-        val user :User = User("name","aa","")
-
-        Log.d("TAG",user.toString())
-
-
         button01.setOnClickListener(clickListener)
         button02.setOnClickListener(clickListener)
         button03.setOnClickListener(clickListener)
