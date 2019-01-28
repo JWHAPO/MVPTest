@@ -1,21 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    tools:context="test.mvp.hapo.com.mvptest.view.list.ListActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_rv"
+    <data>
+        <variable
+            name="account"
+            type="test.mvp.hapo.com.mvptest.network.model.Account" />
+    </data>
+    
+    <android.support.constraint.ConstraintLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/list_refresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIST_REFRESH"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/list_alert_btn" />
+
+        <Button
+            android:id="@+id/list_alert_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDITTEXT_SETUP"
+            app:layout_constraintLeft_toRightOf="@id/list_refresh_btn"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <EditText
+            android:id="@+id/list_id_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={account.account_id}"
+            app:layout_constraintTop_toBottomOf="@+id/list_refresh_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="#000000"/>
+        <EditText
+            android:id="@+id/list_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={account.account_password}"
+            app:layout_constraintTop_toBottomOf="@+id/list_id_et"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="#000000"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_password_et"
+            app:layout_constraintVertical_bias="0.0"
+            />
+
+    
+    </android.support.constraint.ConstraintLayout>
+</layout>

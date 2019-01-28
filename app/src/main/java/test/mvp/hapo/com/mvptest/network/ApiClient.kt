@@ -45,15 +45,15 @@ object ApiClient{
 
         httpClient.addInterceptor(Interceptor { chain ->
             var request = chain
-                    ?.request()
-                    ?.newBuilder()
-                    ?.addHeader("Accept", "application/json")
-                    ?.addHeader("Content-Type", "application/json")
-                    ?.build()
+                    .request()
+                    .newBuilder()
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Content-Type", "application/json")
+                    .build()
 //            if(!TextUtils.isEmpty(PrefUtils().getApiKey(context))){
 //                request?.addHeader("Authorization", PrefUtils().getApiKey(context))
 //            }
-            chain?.proceed(request)
+            chain.proceed(request)
         })
 
         var interceptor = HttpLoggingInterceptor()

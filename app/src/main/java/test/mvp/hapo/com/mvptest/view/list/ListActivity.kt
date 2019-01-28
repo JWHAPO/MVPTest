@@ -1,16 +1,19 @@
 package test.mvp.hapo.com.mvptest.view.list
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.list_layout.*
 import test.mvp.hapo.com.mvptest.R
+import test.mvp.hapo.com.mvptest.databinding.ListLayoutBinding
+import test.mvp.hapo.com.mvptest.network.model.Account
 import test.mvp.hapo.com.mvptest.network.model.User
 import test.mvp.hapo.com.mvptest.network.model.UserUnit
 import test.mvp.hapo.com.mvptest.view.list.adapter.UserAdapter
+
 
 /**
  * MVPTest
@@ -20,6 +23,7 @@ import test.mvp.hapo.com.mvptest.view.list.adapter.UserAdapter
  */
 
 class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.View {
+
     private val tag = ListActivity::class.java.simpleName
 
     private lateinit var presenter: ListPresenter
@@ -27,9 +31,12 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
     private lateinit var mUserArrayList: ArrayList<UserUnit>
     private lateinit var mAdapter : UserAdapter
 
+    lateinit var binding:ListLayoutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_layout)
+
+        binding = DataBindingUtil.setContentView(this,R.layout.list_layout)
 
         presenter = ListPresenter()
         presenter.attach(this)
@@ -41,14 +48,26 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
 
         initRecyclerView()
         presenter.getUser(applicationContext)
+        presenter.getAccount(applicationContext)
+
+        binding.listRefreshBtn.setOnClickListener {
+            presenter.getUser(applicationContext)
+        }
+        binding.listAlertBtn.setOnClickListener {
+            presenter.getAccount(applicationContext)
+        }
+    }
+
+    override fun updateAccount(account: Account) {
+        binding.account = account
     }
 
     override fun updateUserList(user: User) {
         Log.d(tag, "updateUserList")
 
         mUserArrayList = ArrayList(user._embedded.userList)
-        mAdapter = UserAdapter(mUserArrayList!!, this)
-        list_rv.adapter = mAdapter
+        mAdapter = UserAdapter(mUserArrayList, this)
+        binding.listRv.adapter = mAdapter
     }
 
     override fun onItemClick(user: UserUnit) {
@@ -57,9 +76,9 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
 
     private fun initRecyclerView(){
         Log.d(tag, "initRecyclerView")
-        list_rv.setHasFixedSize(true)
+        binding.listRv.setHasFixedSize(true)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        list_rv.layoutManager = layoutManager
+        binding.listRv.layoutManager = layoutManager
     }
 
     override fun toastErrorMsg(error: Throwable) {
@@ -69,7 +88,7 @@ class ListActivity : AppCompatActivity(), UserAdapter.Listener, ListContract.Vie
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.clearCompositeDisposable()
+        presenter.clearCompositeDisposable()
     }
 
 }
