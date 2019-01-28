@@ -8,7 +8,7 @@
 > MainActivty: simple rxjava example   
 
 
-> ListActivty: MVP, Retrofit, rxjava, RecyclerVuew, Kotlin extension   
+> ListActivty: MVP, Retrofit, rxjava, RecyclerVuew, Kotlin extension(-), DataBinding
 
 
 
