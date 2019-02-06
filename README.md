@@ -1,6 +1,6 @@
-# Just Test Code.
+# Just sample Code.
 
-## MVP Pattern, Retrofit, RxJava, Kotlin, RecyclerView, Kotlin extension
+## Android MVP Pattern, Retrofit, RxJava, Kotlin, RecyclerView, Kotlin extension
 
 > SplashActivity: MVP, kotlin extension   
 
