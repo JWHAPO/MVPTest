@@ -23,5 +23,7 @@
         </activity>
         <activity android:name=".view.main.MainActivity" />
         <activity android:name=".view.list.ListActivity" />
+        <activity android:name=".view.room.RoomActivity" />
+        <activity android:name=".view.room.RoomAddActivity" />
     </application>
 </manifest>

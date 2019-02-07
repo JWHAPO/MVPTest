@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="java.lang.String" />
+        <variable
+            name="carList"
+            type="test.mvp.hapo.com.mvptest.repo.model.Car" />
+    </data>
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+
+    <ImageView
+        android:id="@+id/itemBack"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#e2e2e2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:hint="Car Name"
+        app:layout_constraintBottom_toBottomOf="@+id/itemBack"
+        app:layout_constraintStart_toStartOf="@+id/itemBack"
+        app:layout_constraintTop_toTopOf="@+id/itemBack"
+        android:text="@={carList.carName}"
+        />
+
+    <TextView
+        android:id="@+id/itemYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Car Year"
+        app:layout_constraintBottom_toTopOf="@+id/itemOwner"
+        app:layout_constraintEnd_toEndOf="@+id/itemBack"
+        app:layout_constraintTop_toTopOf="@+id/itemBack"
+        android:text="@={``+carList.carYear}" />
+
+    <TextView
+        android:id="@+id/itemOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Car Owner"
+        app:layout_constraintBottom_toBottomOf="@+id/itemBack"
+        app:layout_constraintEnd_toEndOf="@+id/itemBack"
+        android:text="@={carList.carOwner}" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>
